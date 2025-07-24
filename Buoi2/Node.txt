@@ -1,0 +1,13 @@
+Phần đầu , có 5 loại bổ trợ cơ bản,
+id :#
+*: all
+thẻ
+nhóm
+class
+
+chạy sử dụng f12 để fix bug
+
+Thiếu background Clip:
+      background origin  
+
+Thiếu z index , Overflow ,Opacity
