@@ -11,3 +11,7 @@ Thiếu background Clip:
       background origin  
 
 Thiếu z index , Overflow ,Opacity
+
+Phân biệt Potision
+display
+group hover, hover

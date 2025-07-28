@@ -74,13 +74,16 @@ Các giá trị là:
 + column - Thùng chứa sẽ chứa các cột
 + row-reverse - Tương tự nhưng ngược lại
 + column-reverse - Tương tự nhưng ngược lại
+
 **2,flex-wrap**
 Các giá trị là:
 + nowrap - các phần tử sẽ trên 1 hàng nếu vượt quá sẽ bị co lại, hoặc overflow
 + wrap - cho phép xuống dòng 
 + wrap-reverse - đảo ngược vị trí của các cột hoặc các hàng tùy thuộc vào direction
+
 **3, flex-flow**
 + Thuộc tính này flex-flowlà viết tắt của thuộc tính thiết lập cả hai thuộc tính flex-directionvà flex-wrap.
+
 **4,justify-content**
 Thuộc tính này được sử dụng để căn chỉnh các mục flex khi chúng không sử dụng hết không gian có sẵn trên trục chính(theo chiều ngang).
 Các giá trị là:
@@ -90,6 +93,7 @@ Các giá trị là:
 + space-around - xuất hiện các khoảng trống giữa các flex (đầu và cuối bằng nhau, còn lại chia đều)
 + space-between - Xuất hiện khoảng trống giữa các flex (ở đầu và cuối không có khoảng trống)
 + space-evenly - xuất hiện các khoảng trống có khoảng cách bằng nhau
+
 **5,align-items**
 Thuộc tính này align-itemsđược sử dụng để căn chỉnh các mục flex khi chúng không sử dụng hết không gian có sẵn trên trục chéo (theo chiều dọc).
 Có các giá trị là:
@@ -217,7 +221,7 @@ Làm quen với code:
 ```
 Kết quả:
 
-![alt text](Anh3.png)
+![alt text](AnhBuoi3/Anh3.png)
 
 tất cả các thuộc tính của Grid:
 | Thuộc tính              | Mô tả (Tiếng Việt)                                                                 |
