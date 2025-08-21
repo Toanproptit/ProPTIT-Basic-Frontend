@@ -539,3 +539,222 @@ Khi ta Blur:
 ## Conditional Rendering
 + là việc hiển thị nội dung khác nhau trong giao diện người dùng dựa trên các điều kiện cụ thể.
 + Trong React, Có thể sử dụng cấu trúc điều kiện để thực hiện hóa conditional Rendering
+  
+Ví dụ cơ bản:
+
+```jsx
+import { useState } from "react"
+
+function Header() {
+  const [isLoggedIn,SetisLoggedIn] = useState(false);
+  return (
+    <>
+      <div className="box">Header</div>
+      <nav>
+        <ul>
+          <li>Logo</li>
+        </ul>
+        <ul className="ml-auto">
+          {
+            isLoggedIn ?(<li>Toan</li>) :(<li>Login</li>)
+          }
+        </ul>
+      </nav>
+    </>
+  )
+}
+
+export default Header
+```
+Nó giống như If Else vậy
+
+Cách Triển Khai:
++ Sử dụng if else 
+  + Ví dụ:
+  ```jsx
+  function ListTodos({todos}){
+      if(!todos){
+          return null
+      }
+      return(
+          <>
+          <div>
+              {todos.map(item => <div>{item.title}</div>)}
+          </div>
+          </>
+      )
+  }
+  export default ListTodos;
+  ```
++ Sử dụng toán tử 3 ngôi:
+  Ví dụ ở trên
++ Logical && operator
+
+Ví dụ:
+```jsx
+const LoadingSpiner = ({isloading}) =>{
+  return (
+    <div>
+      {isLoading && <p>Loading...</p>}
+    </div>
+  )
+}
+```
++ Switch case
+
+![alt text](./AnhBuoi6/Anh9.png)
+
+## PHẦN 2: LIFE CYCLE
+### Life Cycle 
+
+Trong React, mỗi component đều có một “vòng đời” (lifecycle) với ba giai đoạn chính:
+
++ **Mounting (Gắn lên DOM)** — khi component được tạo và hiển thị lần đầu.
+
++ **Updating (Cập nhật**) — khi component được re-render do thay đổi props hoặc state.
+
++ **Unmounting (Tháo khỏi DOM)** — khi component bị loại bỏ và cần làm sạch (cleanup) tài nguyên.
+
+Mỗi giai đoạn có các phương thức đặc biệt (lifecycle methods) được gọi để bạn có thể thêm logic phù hợp ở từng thời điểm. 
+
+![alt text](./AnhBuoi6/Anh10.png)
+
+
+
+Được chứ 👍 mình sẽ viết lại toàn bộ phần giải thích bằng **Markdown** để bạn copy dễ dàng:
+
+---
+
+# React Hooks
+
+## 1. Vì sao lại có **Hooks**?
+
+Trước đây React có 2 loại component:
+
+* **Function Component**: chỉ return JSX, **không có state hay lifecycle**.
+* **Class Component**: có state (`this.state`) và lifecycle (`componentDidMount`, `componentDidUpdate`, ...).
+
+👉 Vấn đề:
+
+* Class component thường phức tạp, code dài.
+* Khó tái sử dụng logic (ví dụ nhiều component đều fetch data).
+* Lifecycle methods bị chồng chéo, dễ rối.
+
+👉 Giải pháp:
+React 16.8 (2019) giới thiệu **Hooks** để:
+
+* Dùng state và lifecycle trong function component.
+* Viết code ngắn gọn, dễ tái sử dụng.
+* Không cần class nữa, function + hooks đã đủ.
+
+---
+
+## 2. Các Hooks cơ bản
+
+### 🔹 `useState`
+
+Dùng để **quản lý state** trong function component.
+
+```jsx
+import React, { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);  // count: giá trị, setCount: hàm cập nhật
+
+  return (
+    <div>
+      <p>Bạn đã click {count} lần</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+    </div>
+  );
+}
+```
+
+📌 Giải thích:
+
+* `useState(0)` khởi tạo state `count = 0`.
+* `setCount` để thay đổi giá trị.
+* Mỗi lần gọi `setCount`, React sẽ re-render component.
+
+---
+
+### 🔹 `useEffect`
+
+Dùng để **xử lý side effects** (gọi API, setInterval, thao tác DOM, ...).
+Thay thế cho các lifecycle như `componentDidMount`, `componentDidUpdate`, `componentWillUnmount`.
+
+```jsx
+import React, { useState, useEffect } from "react";
+
+function Timer() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log("Component render hoặc cập nhật");
+  });
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Tăng</button>
+    </div>
+  );
+}
+```
+
+---
+
+### Các biến thể của `useEffect`
+
+1. **Chạy mỗi lần render**:
+
+```jsx
+useEffect(() => {
+  console.log("Luôn chạy khi render");
+});
+```
+
+2. **Chạy 1 lần khi mount (giống `componentDidMount`)**:
+
+```jsx
+useEffect(() => {
+  console.log("Chạy 1 lần khi component mount");
+}, []);
+```
+
+3. **Chạy khi dependency thay đổi**:
+
+```jsx
+useEffect(() => {
+  console.log("Chạy khi count thay đổi");
+}, [count]);
+```
+
+4. **Cleanup (giống `componentWillUnmount`)**:
+
+```jsx
+useEffect(() => {
+  const timer = setInterval(() => {
+    console.log("Tick...");
+  }, 1000);
+
+  // cleanup
+  return () => {
+    clearInterval(timer);
+    console.log("Component unmount -> clear timer");
+  };
+}, []);
+```
+
+---
+
+## 3. Tóm gọn
+
+* `useState`: quản lý dữ liệu động (state).
+* `useEffect`: xử lý side effects & lifecycle.
+* Hooks giúp function component làm được tất cả những gì class component có thể làm, nhưng code **ngắn gọn và dễ hiểu hơn**.
+
+---
+
+👉 Bạn có muốn mình viết thêm một **so sánh class component vs function component (dùng hooks)** với cùng một ví dụ (ví dụ Counter hoặc Fetch API) để bạn thấy rõ sự khác biệt không?
+
